@@ -63,10 +63,18 @@ const newTodos = prev.map((task) => {
         })
 }
 
+// if the task is deleted
+const handleTodoDelete = (id:string) =>{
+        setTodos( (prev) => {
+            const newTodos = prev.filter((task) => task.id !== id)
+            return newTodos;
+        })
+}
+
 
     return (
         // @ts-ignore
-        <todosContext.Provider value={{todos, handleAddTodo, toggleTodoAsCompleted}}>
+        <todosContext.Provider value={{todos, handleAddTodo, toggleTodoAsCompleted ,handleTodoDelete}}>
             {children}
         </todosContext.Provider>
     );
