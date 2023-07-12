@@ -12,16 +12,16 @@ export type Todo = {
 
 export type TodosContext = {
     todos: Todo[];
-    handleAddTodo: (task: string) => void; //call signature
+    handleAddTodo: (task: string) => void;
     toggleTodoAsCompleted: (id: string) => void;
     handleDeleteTodo: (id: string) => void;
+
 }
 
 export const todosContext = createContext<TodosContext | null>(null)
 
 export function TodosProvider({children}: { children: ReactNode }) {
 
-    // The state variable todos is expected to be an array of Todo objects.
     const [todos, setTodos] = useState<Todo[]>(() => {
         try{
             const newTodos = localStorage.getItem('todos') || "[]";
@@ -50,13 +50,23 @@ export function TodosProvider({children}: { children: ReactNode }) {
         })
     }
 
-
-
+// if the task is completed
+const toggleTodoAsCompleted = (id:string) => {
+        setTodos( (prev) =>{
+const newTodos = prev.map((task) => {
+    if(task.id == id ){
+        return{...task , completed: !task.completed}
+    }
+    return task;
+})
+            return newTodos;
+        })
+}
 
 
     return (
         // @ts-ignore
-        <todosContext.Provider value={{todos, handleAddTodo}}>
+        <todosContext.Provider value={{todos, handleAddTodo, toggleTodoAsCompleted}}>
             {children}
         </todosContext.Provider>
     );
