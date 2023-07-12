@@ -6,7 +6,6 @@ const Page = () => {
      <main>
          <h2>Task Management Application</h2>
          <AddTodo/>
-
      </main>
     );
 };
