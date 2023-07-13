@@ -8,7 +8,7 @@ const Navbar = () => {
     console.log('navbar ' +  todosFilter)
 
     return (
-        <nav className=" flex justify-between items-center w-96 mb-4 border-amber-100 border-b-4 text-lg" >
+        <nav className=" flex justify-between items-center w-3/5 mb-4 border-amber-100 border-b-4 text-6xl" >
             <Link  href="/" className={(todosFilter === null) ? "active" : ""}> All  </Link>
             <Link href="/?todos=active" className={todosFilter === 'active' ? "active" : ""}> Active  </Link>
             <Link href="/?todos=completed" className={todosFilter === 'completed' ? "active" : ""}> Completed </Link>
