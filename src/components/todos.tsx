@@ -23,7 +23,8 @@ export  const Todos = () => {
         <ul className="main-task">
             {
                 filteredTodos.map((todo) => {
-                    return <li key={todo.id}>
+                    return <li className="grid grid-cols-3 items-center w-96 h-14 border-2 text-3xl
+                    " key={todo.id}>
 
                         {/*Assigns a unique ID to the checkbox. The ID is created by concatenating the string "todo-" with the id property of the todo object.*/}
                         <input type="checkbox" id={`todo-${todo.id}`} checked={todo.completed} onChange={() => {
@@ -35,7 +36,7 @@ export  const Todos = () => {
 
                         {
                             todo.completed && (
-                                <button type="button" onClick={() => handleDeleteTodo(todo.id)}>
+                                <button className="h-10 px-5 m-2 text-green-100 transition-colors duration-150 bg-red-600 rounded-lg focus:shadow-outline hover:bg-red-400" type="button" onClick={() => handleDeleteTodo(todo.id)}>
                                     Delete
                                 </button>
                             )

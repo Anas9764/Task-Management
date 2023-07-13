@@ -22,6 +22,10 @@ main {
     margin-top: 10rem;
 }
 
+.main-task li input[type="checkbox"]:checked  + label {
+    text-decoration: line-through;
+    color: #D14D72;
+}
 .active{
     color: red;
 }
