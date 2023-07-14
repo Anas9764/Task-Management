@@ -31,7 +31,7 @@ export const Todos = () => {
   useEffect(() => {
     setFilteredTodos(filterTodos(todos, filterString));
     console.log("filteredTodos " + filteredTodos);
-  }, [filterString]);
+  }, [filterString, todos]);
 
   return (
     <ul className="main-task">
