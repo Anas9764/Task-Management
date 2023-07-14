@@ -44,8 +44,8 @@ export const Todos = () => {
           >
         
             <input
-              type="checkbox"
-            // type="radio"
+              // type="checkbox"
+            type="radio"
 
               id={`todo-${todo.id}`}
               checked={todo.status === Filter.Completed}
@@ -59,7 +59,9 @@ export const Todos = () => {
             />
 
             <input
-              type="checkbox"
+              // type="checkbox"
+            type="radio"
+
               id={`todo-${todo.id}`}
               checked={todo.status === Filter.inProgress}
               onChange={() => {

@@ -20,8 +20,8 @@ main {
     align-items: center;
     min-height: 100vh;
     margin-top: 10rem;
-}
 
+}
 .main-task li input[type="checkbox"]:checked  + label {
     text-decoration: line-through;
     color: #D14D72;
@@ -34,9 +34,7 @@ main {
     min-height: 6rem;
     border-bottom: .1rem solid #ccc;
 }
-.active{
-    color: red;
-}
+
 
 /*#addtaskinput{*/
 /*    !*border: .1rem solid #ccc;*!*/
