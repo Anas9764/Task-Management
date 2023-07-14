@@ -7,7 +7,7 @@ import { Filter, Todo } from "@/lib/types";
 // make a switch case function to filter todos as described below
 
 const filterTodos = (todos: Todo[], filter: any) => {
-  switch (filter) {
+  switch (filter) { 
     case Filter.Todo:
       return todos.filter((todo) => todo.status === Filter.Todo);
     case Filter.inProgress:
