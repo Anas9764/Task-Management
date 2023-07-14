@@ -1,50 +1,89 @@
-"use client"
-import {useTodos} from "@/store/todos";
+"use client";
+import React, { useState, useEffect } from "react";
+import { useTodos } from "@/store/todos";
 import { useSearchParams } from "next/navigation";
+import { Filter, Todo } from "@/lib/types";
 
-export  const Todos = () => {
-    const {todos, toggleTodoAsCompleted, handleDeleteTodo} = useTodos();
+// make a switch case function to filter todos as described below
 
-    const searchParams = useSearchParams();
-    const todosFilter = searchParams.get('todos')
-    console.log("params " + todosFilter)
+const filterTodos = (todos: Todo[], filter: any) => {
+  switch (filter) {
+    case Filter.Todo:
+      return todos.filter((todo) => todo.status === Filter.Todo);
+    case Filter.inProgress:
+      return todos.filter((todo) => todo.status === Filter.inProgress);
+    case Filter.Completed:
+      return todos.filter((todo) => todo.status === Filter.Completed);
+    default:
+      return todos;
+  }
+};
 
-    let filteredTodos = todos;
+export const Todos = () => {
+  const { todos, toggleTodoAsCompleted, handleDeleteTodo } = useTodos();
 
-    if (todosFilter === "active") {
-        filteredTodos = todos.filter((todo) => !todo.completed);
-    } else if (todosFilter === "completed") {
-        filteredTodos = todos.filter((todo) => todo.completed);
-    }
+  const searchParams = useSearchParams();
+  const filterString: any = searchParams.get("todos");
+  const [filteredTodos, setFilteredTodos] = useState<Todo[]>(todos);
 
+  console.log("params " + filterString);
 
+  useEffect(() => {
+    setFilteredTodos(filterTodos(todos, filterString));
+    console.log("filteredTodos " + filteredTodos);
+  }, [filterString]);
 
-    return (
-        <ul className="main-task">
-            {
-                filteredTodos.map((todo) => {
-                    return <li className="grid grid-cols-3 items-center w-96 h-14 border-2 text-3xl
-                    " key={todo.id}>
+  return (
+    <ul className="main-task">
+      {filteredTodos.map((todo) => {
+        return (
+          <li
+            className="grid grid-cols-3 items-center w-96 h-14 border-2 text-3xl
+                    "
+            key={todo.id}
+          >
+        
+            <input
+              type="checkbox"
+            // type="radio"
 
-                        {/*Assigns a unique ID to the checkbox. The ID is created by concatenating the string "todo-" with the id property of the todo object.*/}
-                        <input type="checkbox" id={`todo-${todo.id}`} checked={todo.completed} onChange={() => {
-                            console.log(todo.completed)
-                            toggleTodoAsCompleted(todo.id)}
-                        } />
+              id={`todo-${todo.id}`}
+              checked={todo.status === Filter.Completed}
+              onChange={() => {
 
-                        <label htmlFor={`todo-${todo.id}`}> {todo.task}</label>
+                toggleTodoAsCompleted({
+                  id: todo.id,
+                  status: Filter.Completed,
+                });
+              }}
+            />
 
-                        {
-                            todo.completed && (
-                                <button className="h-10 px-5 m-2 text-green-100 transition-colors duration-150 bg-red-600 rounded-lg focus:shadow-outline hover:bg-red-400" type="button" onClick={() => handleDeleteTodo(todo.id)}>
-                                    Delete
-                                </button>
-                            )
-                        }
+            <input
+              type="checkbox"
+              id={`todo-${todo.id}`}
+              checked={todo.status === Filter.inProgress}
+              onChange={() => {
+                toggleTodoAsCompleted({
+                  id: todo.id,
+                  status: Filter.inProgress,
+                });
+              }}
+            />
 
-                    </li>
-                })
-            }
-        </ul>
-    )
-}
+            <label htmlFor={`todo-${todo.id}`}> {todo.task}</label>
+            {/* TODO: do same for if its in progress */}
+            {todo.status === Filter.Completed && (
+              <button
+                className="h-10 px-5 m-2 text-green-100 transition-colors duration-150 bg-red-600 rounded-lg focus:shadow-outline hover:bg-red-400"
+                type="button"
+                onClick={() => handleDeleteTodo(todo.id)}
+              >
+                Delete
+              </button>
+            )}
+          </li>
+        );
+      })}
+    </ul>
+  );
+};
