@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@300;400;500;700;900&family=Urbanist:wght@300;600&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /*font-family: 'Lexend Deca', sans-serif;*/
+    font-family: 'Urbanist', sans-serif;
+}
+
+html{
+    font-size: 62.5%;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    margin-top: 10rem;
+}
+
+.main-task li input[type="checkbox"]:checked  + label {
+    text-decoration: line-through;
+    color: #D14D72;
+}
+.main-task li{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    width:50rem;
+    min-height: 6rem;
+    border-bottom: .1rem solid #ccc;
+}
+.active{
+    color: red;
+}
+
+/*#addtaskinput{*/
+/*    !*border: .1rem solid #ccc;*!*/
+/*    !*border-radius: .3rem;*!*/
+/*    width: 45rem;*/
+/*    !*margin: 4rem 0;*!*/
+/*    !*user-focus: none;*!*/
+/*    !*padding: .6rem 1rem;*!*/
+/*    font-size: 1.6rem;*/
+/*    letter-spacing: .06rem;*/
+/*    !*font-weight: bold;*!*/
+/*}*/
