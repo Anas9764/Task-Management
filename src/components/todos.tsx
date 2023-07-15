@@ -42,10 +42,11 @@ export const Todos = () => {
                     "
             key={todo.id}
           >
+
         
             <input
-              // type="checkbox"
-            type="radio"
+              type="checkbox"
+            // type="radio"
 
               id={`todo-${todo.id}`}
               checked={todo.status === Filter.Completed}
@@ -57,8 +58,7 @@ export const Todos = () => {
                 });
               }}
             />
-
-            <input
+<input
               // type="checkbox"
             type="radio"
 
@@ -71,6 +71,7 @@ export const Todos = () => {
                 });
               }}
             />
+   
 
             <label htmlFor={`todo-${todo.id}`}> {todo.task}</label>
             {/* TODO: do same for if its in progress */}
